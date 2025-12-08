@@ -1,5 +1,22 @@
+// ======== Firebase (Compat) ========
+const firebaseConfig = {
+  apiKey: "AIzaSyCy3MEe006atAjmSIjKbUvI68uLXPD-hhE",
+  authDomain: "airevolutioncontact-5db6a.firebaseapp.com",
+  databaseURL: "https://airevolutioncontact-5db6a-default-rtdb.firebaseio.com",
+  projectId: "airevolutioncontact-5db6a",
+  storageBucket: "airevolutioncontact-5db6a.appspot.com",
+  messagingSenderId: "622517273550",
+  appId: "1:622517273550:web:5a4a2b3146feedd0c4619f"
+};
+
+firebase.initializeApp(firebaseConfig);
+const messagesRef = firebase.database().ref("messages");
+
+// ===============================
 // Wait for the DOM to be fully loaded
+// ===============================
 document.addEventListener('DOMContentLoaded', function () {
+
     // Mobile Menu Toggle
     const mobileMenuToggle = document.createElement('button');
     mobileMenuToggle.className = 'mobile-menu-toggle';
@@ -34,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth'
                 });
 
-                // Close mobile menu if open
                 if (mainNav.classList.contains('active')) {
                     mobileMenuToggle.classList.remove('active');
                     mainNav.classList.remove('active');
@@ -52,11 +68,9 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const tabId = this.getAttribute('data-tab');
 
-            // Remove active class from all buttons and contents
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
 
-            // Add active class to clicked button and corresponding content
             this.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         });
@@ -73,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const email = emailInput.value.trim();
 
             if (validateEmail(email)) {
-                // Simulate form submission
                 this.innerHTML = `
                     <div class="form-success" style="
                         padding: 15px;
@@ -85,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 `;
 
-                // In a real scenario, you would send the data to your server here
                 console.log('Subscribed email:', email);
             } else {
                 showError(emailInput, 'Please enter a valid email address');
@@ -93,64 +105,74 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Contact Form Submission
+    // =====================================
+    //      CONTACT FORM + FIREBASE
+    // =====================================
+
     const contactForm = document.querySelector('.contact-form');
 
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Get form values
-            const name = this.querySelector('input[type="text"]').value.trim();
-            const email = this.querySelector('input[type="email"]').value.trim();
-            const subject = this.querySelector('input[type="text"][placeholder="Subject"]').value.trim();
-            const message = this.querySelector('textarea').value.trim();
+            const name = this.querySelector('#name').value.trim();
+            const email = this.querySelector('#email').value.trim();
+            const subject = this.querySelector('#subject') ? this.querySelector('#subject').value.trim() : "No Subject";
+            const message = this.querySelector('#message').value.trim();
 
-            // Validate form
             let isValid = true;
 
             if (name === '') {
-                showError(this.querySelector('input[type="text"]'), 'Please enter your name');
+                showError(this.querySelector('#name'), 'Please enter your name');
                 isValid = false;
             }
 
             if (email === '' || !validateEmail(email)) {
-                showError(this.querySelector('input[type="email"]'), 'Please enter a valid email address');
+                showError(this.querySelector('#email'), 'Please enter a valid email address');
                 isValid = false;
             }
 
             if (message === '') {
-                showError(this.querySelector('textarea'), 'Please enter your message');
+                showError(this.querySelector('#message'), 'Please enter your message');
                 isValid = false;
             }
 
-            if (isValid) {
-                // Simulate form submission
-                const submitButton = this.querySelector('button[type="submit"]');
-                submitButton.disabled = true;
-                submitButton.textContent = 'Sending...';
+            if (!isValid) return;
 
-                setTimeout(() => {
-                    this.innerHTML = `
-                        <div class="form-success" style="
-                            padding: 30px;
-                            background: #f8f9fa;
-                            border-radius: var(--border-radius);
-                            text-align: center;
-                        ">
-                            <h3 style="margin-bottom: 15px; color: var(--primary-color);">Thank you for your message!</h3>
-                            <p style="margin: 0; color: var(--text-color);">We'll get back to you as soon as possible.</p>
-                        </div>
-                    `;
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
-                    // In a real scenario, you would send the data to your server here
-                    console.log('Contact form submitted:', { name, email, subject, message });
-                }, 1500);
-            }
+            const newMessage = messagesRef.push();
+            newMessage.set({
+                name: name,
+                email: email,
+                subject: subject,
+                message: message,
+                timestamp: Date.now()
+            }).then(() => {
+
+                this.innerHTML = `
+                    <div class="form-success" style="
+                        padding: 30px;
+                        background: #f8f9fa;
+                        border-radius: var(--border-radius);
+                        text-align: center;
+                    ">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">Thank you for your message!</h3>
+                        <p style="margin: 0; color: var(--text-color);">We'll get back to you as soon as possible.</p>
+                    </div>
+                `;
+
+            }).catch(error => {
+                alert("Error: " + error.message);
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Message';
+            });
         });
     }
 
-    // Scroll Animation for Sections
+    // Scroll Animation
     const animateOnScroll = function () {
         const elements = document.querySelectorAll('.news-card, .app-card, .stat-item, .about-image');
 
@@ -164,13 +186,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
-    // Run once on page load
     animateOnScroll();
-
-    // Run on scroll
     window.addEventListener('scroll', animateOnScroll);
 
-    // Sticky Header on Scroll
+    // Sticky Header
     const header = document.querySelector('.main-header');
     const headerHeight = header.offsetHeight;
 
@@ -184,21 +203,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Google Adsense Integration (Example)
-    // Note: Replace with your actual AdSense code
+    // Basic AdSense placeholder
     const loadAdsense = function () {
-        // This is just a placeholder - use your real AdSense code
         console.log('AdSense would load here');
-        /*
-        const adScript = document.createElement('script');
-        adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID';
-        adScript.async = true;
-        adScript.crossOrigin = 'anonymous';
-        document.head.appendChild(adScript);
-        */
     };
-
-    // Load AdSense after a short delay
     setTimeout(loadAdsense, 2000);
 
     // Helper Functions
@@ -230,18 +238,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { once: true });
     }
 
-    // Initialize first tab as active if none is active
     if (document.querySelectorAll('.tab-btn.active').length === 0 && tabButtons.length > 0) {
         tabButtons[0].classList.add('active');
         tabContents[0].classList.add('active');
     }
 });
 
-// Additional animations with Intersection Observer
+// Intersection Observer
 const initIntersectionObserver = function () {
-    const observerOptions = {
-        threshold: 0.1
-    };
+    const observerOptions = { threshold: 0.1 };
 
     const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
@@ -252,10 +257,8 @@ const initIntersectionObserver = function () {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.news-card, .app-card, .stat-item, .about-image').forEach(element => {
-        observer.observe(element);
-    });
+    document.querySelectorAll('.news-card, .app-card, .stat-item, .about-image')
+        .forEach(element => observer.observe(element));
 };
 
-// Initialize Intersection Observer when DOM is loaded
 document.addEventListener('DOMContentLoaded', initIntersectionObserver);
