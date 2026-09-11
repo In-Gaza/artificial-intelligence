@@ -1,63 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Artificial Intelligence</title>
-     <link rel="stylesheet" href="style.css">
+    <title>Contact Us - AI Revolution</title>
+    <meta name="description" content="Get in touch with AI Revolution. Send us your questions, feedback, or collaboration requests about artificial intelligence and technology.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aigeniuslab.netlify.app/contact.html">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7312423756327546"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <header>
-        <h1>Contact Us</h1>
-        <p>We'd love to hear from you!</p>
-    </header>
-    <div class="container">
-        <h2>Get in Touch</h2>
-        <p>If you have any questions, collaboration ideas, or feedback, feel free to reach out using the details below or fill out the contact form.</p>
-        
-        <div class="contact-info">
-            <h3>Our Contact Details</h3>
-            <p><strong>Phone:</strong> +201279102786</p>
-            <p><strong>Email:</strong> rokymakson@gmail.com</p>
-            <p><strong>Address:</strong> October City, Egypt</p>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <h1><span class="ai-text">AI</span> Revolution</h1>
+                <p>Exploring the Future of Intelligence</p>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="articles.html">Articles</a></li>
+                    <li><a href="videos.html">Videos</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="index.html#contact" class="btn btn-primary">Subscribe</a>
+            </div>
         </div>
-        
-        <h3>Send us a Message</h3>
-        <form action="#" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="text" name="subject" placeholder="Subject" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-    <footer>
-        <p>&copy; 2023 Artificial Intelligence Project. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    </header>
 
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you!</p>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="contact-intro">
+                If you have any questions, collaboration ideas, or feedback, feel free to reach out using 
+                the details below or fill out the contact form.
+            </p>
+
+            <div class="contact-grid">
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h3>Our Contact Details</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +201279102786</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> rokymakson@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> October City, Egypt</p>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/s.yd.rdwan.88499/" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://x.com/SaidInPalestine" target="_blank" rel="noopener" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://youtube.com/@haqaeck" target="_blank" rel="noopener" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+
+                    <div class="contact-extra">
+                        <p><i class="fas fa-clock"></i> <strong>Response Time:</strong> Within 24-48 hours</p>
+                        <p><i class="fas fa-comments"></i> <strong>Languages:</strong> Arabic & English</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
                 <form id="contactForm" class="contact-form">
+                    <h3>Send us a Message</h3>
+
                     <div class="form-group">
                         <input type="text" id="name" placeholder="Your Name" required>
                     </div>
+
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Your Email" required>
                     </div>
+
                     <div class="form-group">
                         <input type="text" id="subject" placeholder="Subject" required>
                     </div>
+
                     <div class="form-group">
-                        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                        <textarea id="message" placeholder="Your Message" rows="6" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+
                     <div id="formFeedback"></div>
                 </form>
+
             </div>
         </div>
- 
-    <script src="script.js"></script>
+    </section>
 
+    <!-- AdSense Ad Slot -->
+    <div class="container" style="margin: 40px auto; text-align:center;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7312423756327546"
+             data-ad-slot="1164874367"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>AI Revolution</h3>
+                    <p>Exploring the future of artificial intelligence and its impact on society.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get the latest AI news delivered to your inbox.</p>
+                    <form id="footerNewsletterForm" class="footer-newsletter-form">
+                        <input type="email" id="footerEmail" placeholder="Your Email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Revolution. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
