@@ -1,7 +1,28 @@
+# robots.txt for AI Revolution
+# Website: https://aigeniuslab.netlify.app/
+# Last updated: 2025-01-01
+
+# Allow all search engines to crawl the site
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
-Disallow: /tmp/
 
-Sitemap: https://yourwebsite.com/sitemap.xml
+# Block legal pages (not needed in search results)
+Disallow: /privacy.html
+Disallow: /terms.html
+Disallow: /cookies.html
+Disallow: /disclaimer.html
+
+# Block access to sensitive files (if any)
+Disallow: /script.js
+Disallow: /styles.css
+
+# Allow Google AdSense crawler
+User-agent: Mediapartners-Google
+Allow: /
+
+# Allow Google Image crawler
+User-agent: Googlebot-Image
+Allow: /
+
+# Sitemap location
+Sitemap: https://aigeniuslab.netlify.app/sitemap.xml
