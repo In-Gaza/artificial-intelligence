@@ -232,3 +232,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
     elements.forEach(el => observer.observe(el));
 });
+
+
+
+
+// =====================================
+// Back to Top Button
+// =====================================
+const backToTopBtn = document.getElementById('backToTop');
+
+if (backToTopBtn) {
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', function () {
+        // Add click animation
+        this.classList.add('clicked');
+        setTimeout(() => this.classList.remove('clicked'), 500);
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
