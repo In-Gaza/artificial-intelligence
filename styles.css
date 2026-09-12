@@ -1554,3 +1554,142 @@ ul {
         font-size: 1rem;
     }
 }
+
+
+/* ============================= */
+/* About Page Styles */
+/* ============================= */
+
+.about-page-section {
+    padding: 60px 0 80px;
+    background: #ffffff;
+}
+
+.about-block {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    background: #f8f9fa;
+    padding: 35px 30px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    border-left: 4px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.about-block:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+}
+
+.about-block-icon {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+}
+
+.about-block-content {
+    flex: 1;
+}
+
+.about-block-content h2 {
+    font-size: 1.6rem;
+    color: var(--dark-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.about-block-content p {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.about-block-content strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* About List */
+.about-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.about-list li:last-child {
+    border-bottom: none;
+}
+
+.about-list li i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-page-section {
+        padding: 40px 0 60px;
+    }
+
+    .about-block {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 25px 20px;
+        gap: 20px;
+    }
+
+    .about-block:hover {
+        transform: translateY(-3px);
+    }
+
+    .about-block-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .about-block-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .about-list li {
+        text-align: left;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-block-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .about-block-content p,
+    .about-list li {
+        font-size: 0.92rem;
+    }
+}
